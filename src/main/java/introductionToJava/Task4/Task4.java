@@ -13,19 +13,17 @@ public class Task4 {
 
         try{
             fileWriter = new FileWriter("task4.sql");
-            fileWriter.append("задание");
+            fileWriter.append("Домашнее задание номер 4");
             fileWriter.flush();
             reader = new FileReader("task4.sql");
             while (reader.ready()){
                 text += (char)reader.read();
-
             }
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
         System.out.println(text);
-
 
         FileReader reader1 = null;
         String text1 = "";
@@ -34,7 +32,6 @@ public class Task4 {
             while (reader1.ready()) {
                 text1 += (char) reader1.read();
             }
-
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
@@ -44,7 +41,7 @@ public class Task4 {
         String[] str1 = text1.split("\n");
         ArrayList<String> surname = new ArrayList<>();
         ArrayList<String> name = new ArrayList<>();
-        ArrayList<String> ochestvo = new ArrayList<>();
+        ArrayList<String> patronymic = new ArrayList<>();
         ArrayList<Integer> age = new ArrayList<>();
         ArrayList<Boolean> gender = new ArrayList<>();
         LinkedList<Integer> ll = new LinkedList<>();
@@ -52,14 +49,14 @@ public class Task4 {
             String[] tmp = str1[i].split(" ");
             surname.add(tmp[0]);
             name.add(tmp[1]);
-            ochestvo.add(tmp[2]);
+            patronymic.add(tmp[2]);
             age.add(Integer.parseInt(tmp[3]));
-            gender.add(tmp[4].equals("жен") ? true:false);
+            gender.add(tmp[4].equals("жен") ? true : false);
             ll.add(i);
         }
         for (int i = 0; i < name.size(); i++) {
-            System.out.printf("%d. %s %s.%s. %d %s\n",ll.get(i),surname.get(ll.get(i)),name.get(ll.get(i)).charAt(0),ochestvo.get(ll.get(i)).charAt(0),
-                    age.get(ll.get(i)),gender.get(ll.get(i)).equals(true) ? "Ж":"М");
+            System.out.printf("%d. %s %s.%s. %d %s\n",ll.get(i),surname.get(ll.get(i)),name.get(ll.get(i)).charAt(0),patronymic.get(ll.get(i)).charAt(0),
+                    age.get(ll.get(i)),gender.get(ll.get(i)).equals(true) ? "Ж" : "М");
         }
         for (int i = 1; i < age.size() ; i++) {
             int current = ll.get(i);
@@ -72,8 +69,8 @@ public class Task4 {
         }
         System.out.println();
         for (int i = 0; i < name.size(); i++) {
-            System.out.printf("%d. %s %s.%s. %d %s\n",ll.get(i),surname.get(ll.get(i)),name.get(ll.get(i)).charAt(0),ochestvo.get(ll.get(i)).charAt(0),
-                    age.get(ll.get(i)),gender.get(ll.get(i)).equals(true) ? "Ж":"М");
+            System.out.printf("%d. %s %s.%s. %d %s\n",ll.get(i),surname.get(ll.get(i)),name.get(ll.get(i)).charAt(0),patronymic.get(ll.get(i)).charAt(0),
+                    age.get(ll.get(i)),gender.get(ll.get(i)).equals(true) ? "Ж" : "М");
         }
     }
 }
