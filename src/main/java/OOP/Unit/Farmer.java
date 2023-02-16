@@ -9,4 +9,12 @@ public class Farmer extends Human {
     }
     public void treat(Human human){  }
     public void armiger (Shooter Shooter){  }
+
+    @Override
+    public StringBuilder getInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Фермер: ").append(Farmer.super.name)
+                .append(" HP: ").append(Farmer.super.hp)
+                .append(" ATK: ").append(Farmer.super.attack);
+    }
 }

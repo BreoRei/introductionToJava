@@ -12,4 +12,13 @@ public class Crossbowman extends Shooter{
 
     @Override
     public Integer getAttack() { return attack; }
+
+    @Override
+    public StringBuilder getInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Арбалетчик: ").append(Crossbowman.super.name)
+                .append(" HP: ").append(Crossbowman.super.hp)
+                .append(" ATK: ").append(Crossbowman.super.attack)
+                .append(" cartridges: ").append(Crossbowman.super.cartridges);
+    }
 }

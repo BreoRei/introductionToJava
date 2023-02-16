@@ -15,4 +15,12 @@ public class Bandit extends Warrior{
 
     public void steal(int disguise, Shooter Shooter) {
     }
+
+    @Override
+    public StringBuilder getInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Бандит: ").append(Bandit.super.name)
+                .append(" HP: ").append(Bandit.super.hp)
+                .append(" ATK: ").append(Bandit.super.attack);
+    }
 }

@@ -1,6 +1,6 @@
 package OOP.Unit;
 
-public abstract class Human {
+public abstract class Human implements GameInterfase{
     protected String name;
     protected Integer hp;
     protected Integer maxHp;
@@ -24,4 +24,9 @@ public abstract class Human {
     }
     public Integer getProtection() { return protection; }
     public Integer getDamage() { return damage; }
+
+    @Override
+    public void step(int a) {
+
+    }
 }

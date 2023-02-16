@@ -14,4 +14,13 @@ public class Sniper extends Shooter{
     public Integer getAttack() {
         return attack;
     }
+
+    @Override
+    public StringBuilder getInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Снайпер: ").append(Sniper.super.name)
+                .append(" HP: ").append(Sniper.super.hp)
+                .append(" ATK: ").append(Sniper.super.attack).
+                append(" cartridges: ").append(Sniper.super.cartridges);
+    }
 }

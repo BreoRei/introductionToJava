@@ -14,4 +14,13 @@ public class Witch extends Mag{
     public Integer getAttack() {
         return attack;
     }
+
+    @Override
+    public StringBuilder getInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Колдун: ").append(Witch.super.name)
+                .append(" HP: ").append(Witch.super.hp)
+                .append(" MP ").append(Witch.super.mana)
+                .append(" ATK: ").append(Witch.super.attack);
+    }
 }

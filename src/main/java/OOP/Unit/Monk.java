@@ -15,4 +15,13 @@ public class Monk extends Mag{
     public Integer FreezeWitch(Witch witch){
         return FreezeStep;
     }
+
+    @Override
+    public StringBuilder getInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Колдун: ").append(Monk.super.name)
+                .append(" HP: ").append(Monk.super.hp)
+                .append(" MP ").append(Monk.super.mana)
+                .append(" ATK: ").append(Monk.super.attack);
+    }
 }
