@@ -2,6 +2,6 @@ package OOP.Unit;
 
 public interface GameInterfase {
     StringBuilder getInfo();
-    void step(int a);
+    void step();
 
 }

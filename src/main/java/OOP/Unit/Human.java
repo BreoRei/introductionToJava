@@ -2,31 +2,39 @@ package OOP.Unit;
 
 public abstract class Human implements GameInterfase{
     protected String name;
-    protected Integer hp;
+    protected Float hp;
     protected Integer maxHp;
     protected Integer attack;
-    protected Integer damage;
-    protected Integer protection;
+    protected Integer damageMin;
+    protected Integer damageMax;
+    protected Integer defense;
     protected Integer speed;
 
-    public Human(String name, Integer hp, Integer maxHp, Integer attack, Integer damage, Integer protection, Integer speed) {
+    public Human(String name, Float hp, Integer maxHp, Integer attack, Integer damageMin, Integer damageMax, Integer defense, Integer speed) {
         this.name = name;
         this.hp = hp;
         this.maxHp = maxHp;
         this.attack = attack;
-        this.damage = damage;
-        this.protection = protection;
+        this.damageMin = damageMin;
+        this.damageMax = damageMax;
+        this.defense = defense;
         this.speed = speed;
     }
 
     public Integer getAttack() {
         return attack;
     }
-    public Integer getProtection() { return protection; }
-    public Integer getDamage() { return damage; }
+    public Integer getDefense() { return defense; }
+    public Integer getDamageMin() { return damageMin; }
+
+    public Integer getDamageMax() { return damageMax; }
+    public Integer getSpeed() { return speed; }
 
     @Override
-    public void step(int a) {
+    public void step() {}
 
-    }
+//    @Override
+//    public StringBuilder getInfo() {
+//        return null;
+//    }
 }

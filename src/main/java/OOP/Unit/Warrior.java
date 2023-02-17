@@ -2,8 +2,8 @@ package OOP.Unit;
 
 public abstract class Warrior extends Human{
 
-    public Warrior(String name, Integer hp, Integer maxHp, Integer attack, Integer damage, Integer protection, Integer speed) {
-        super(name, hp, maxHp, attack, damage, protection, speed);
+    public Warrior(String name, Float hp, Integer maxHp, Integer attack, Integer damageMin, Integer damageMax, Integer defense, Integer speed) {
+        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed);
     }
 
     //    Атака ближнего боя
