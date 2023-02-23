@@ -7,8 +7,8 @@ public class Witch extends Mag{
         super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed, mana, maxMana, posX, posY);
     }
     public Witch(String name, Vector2D coords) {
-        super(name, 130.f, 130, 15, 15, 5, 2,
-                6, 6 ,5, coords.posX, coords.posY);
+        super(name, 50.f, 50, 9, -6, -6, 3,
+                7, 5,5, coords.posX, coords.posY);
     }
 
     @Override
@@ -22,7 +22,7 @@ public class Witch extends Mag{
         return builder.append("Колдун: \t").append(Witch.super.name)
                 .append("\t| ATK:\t").append(Witch.super.attack)
                 .append("\t| HP:\t").append(Witch.super.hp)
-                .append("\t| MP:\t").append(Witch.super.mana)
+                .append(" \t| MP:\t").append(Witch.super.mana)
                 .append("\t|").append("\t| (X.Y) : ").append(Witch.super.coords.posX).append(".").append(Witch.super.coords.posY);
     }
 }

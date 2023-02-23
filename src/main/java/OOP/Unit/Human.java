@@ -28,12 +28,12 @@ public abstract class Human implements GameInterfase {
     }
 
     public int getAttack() {
-        return attack;
+        return this.attack;
     }
-    public int getDefense() { return defense; }
-    public int getSpeed() { return speed; }
-    public float getHp () { return hp; }
-    public float setHp (float p) { return hp-p; }
+    public int getDefense() { return this.defense; }
+    public int getSpeed() { return this.speed; }
+    public float getHp () { return this.hp; }
+    public float setHp (float hp) { return this.hp = hp; }
 
     @Override
     public void step(ArrayList<Human> team1, ArrayList<Human> team2) { }

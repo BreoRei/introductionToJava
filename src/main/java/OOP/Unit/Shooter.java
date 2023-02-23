@@ -23,43 +23,56 @@ public abstract class Shooter extends Human {
     @Override
     public void step(ArrayList<Human> team1, ArrayList<Human> team2) {
         float hp = getHp();
-        if (hp != 0) {
+        if (hp > 0) {
             int arrows = getCartridges();
             if (arrows > 0) {
                 int index = super.findNearest(team2);
                 makeDamage(team2.get(index));
-            } else {
-                findFarmer(team1);
+            }
+            if (findFarmer(team1)) {
+                setCartridges(getCartridges()+1);
             }
         }
     }
-    protected Human findFarmer(ArrayList<Human> team) {
+    protected boolean findFarmer(ArrayList<Human> team) {
         ArrayList <Human> arrayFarmer = new ArrayList<>();
         for (int i = 0; i < team.size(); i++) {
             if (team.get(i).getClass() == Farmer.class) {
-                if((((Farmer) team.get(i)).getCartridgesFarmer()) > 0) {
+                if(((Farmer) team.get(i)).getCartridgesFarmer() > 0) {
                     arrayFarmer.add(team.get(i));
                 }
             }
         }
-        return arrayFarmer.get(findNearest(arrayFarmer));
+        switch (arrayFarmer.size()) {
+            case (0):
+                return false;
+            case (1):
+                ((Farmer) arrayFarmer.get(0)).setCartridgesFarmer(0);
+                return true;
+            default:
+                ((Farmer) arrayFarmer.get(findNearest(arrayFarmer))).setCartridgesFarmer(0);
+                return true;
+        }
     }
     @Override
     public void makeDamage (Human unit) {
-        float damage = unit.getDefense() - this.attack;
+        int damage = unit.getDefense() - attack;
+        float hp;
         if(damage < 0) {
-            setHp(unit.getHp() - this.damageMax);
+            hp = unit.getHp() - damageMax;
+            unit.setHp(hp < 0 ? 0: hp);
         } else if (damage > 0) {
-            setHp(unit.getHp() - this.damageMin);
+            hp = unit.getHp() - damageMin;
+            unit.setHp(hp < 0 ? 0: hp);
         } else {
-            setHp(unit.getHp() - ((this.damageMax+this.damageMin)/2));
+            hp = unit.getHp() - ((damageMax+damageMin)/2);
+            unit.setHp(hp < 0 ? 0: hp);
         }
-        this.setCartridges(this.getCartridges()-1);
+        setCartridges(getCartridges()-1);
     }
     protected int getCartridges() {
         return this.cartridges;
     }
-
     protected void setCartridges(int cartridges) {
         this.cartridges = cartridges;
     }
