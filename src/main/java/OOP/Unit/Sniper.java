@@ -1,17 +1,14 @@
 package OOP.Unit;
 
 public class Sniper extends Shooter{
-    public Sniper(String name, Float hp, Integer maxHp, Integer attack, Integer damageMin, Integer damageMax, Integer defense,
-                  Integer speed, Integer cartridges, Integer range) {
-        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed, cartridges, range);
-    }
 
-    public Sniper(String name) {
-        super(name, 110.f, 110, 20, 6, 7, 6,6, 6, 5);
+    public Sniper(String name, Vector2D coords) {
+        super(name, 110.f, 110, 8, 6, 8, 6,
+                8, 0, 5, coords.posX, coords.posY);
     }
 
     @Override
-    public Integer getAttack() {
+    public int getAttack() {
         return attack;
     }
 
@@ -22,6 +19,6 @@ public class Sniper extends Shooter{
                 .append("\t| ATK:\t").append(Sniper.super.attack)
                 .append("\t| HP:\t").append(Sniper.super.hp)
                 .append("\t| Arrows: ").append(Sniper.super.cartridges)
-                .append("\t|");
+                .append("\t|").append("\t| (X.Y) : ").append(Sniper.super.coords.posX).append(".").append(Sniper.super.coords.posY);
     }
 }

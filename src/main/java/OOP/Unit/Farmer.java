@@ -1,21 +1,33 @@
 package OOP.Unit;
 
 public class Farmer extends Human {
-    public Farmer(String name, Float hp, Integer maxHp, Integer attack, Integer damageMin, Integer damageMax, Integer defense, Integer speed) {
-        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed);
+    int cartridges;
+    protected Farmer(String name, float hp, int maxHp, int attack, int damageMin, int damageMax, int defense,
+                  int speed, int cartridges, int posX, int posY) {
+        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed, posX, posY);
+        this.cartridges = cartridges;
     }
-    public Farmer(String name) {
-        super(name, 150.f, 1, 1, 1, 1, 1, 1);
+    public Farmer(String name, Vector2D coords) {
+        super(name, 150.f, 1, 1, 1, 1, 1,
+                1, coords.posX, coords.posY);
+        this.cartridges = 1;
     }
-    public void treat(Human human){  }
-    public void armiger (Shooter Shooter){  }
 
+    protected void armiger(Shooter Shooter){  }
+
+    public int getCartridgesFarmer () {
+        return this.cartridges;
+    }
+    public void setCartridgesFarmer (int cartridges) {
+        this.cartridges = cartridges - 1;
+    }
     @Override
     public StringBuilder getInfo() {
         StringBuilder builder = new StringBuilder();
         return builder.append("Фермер: \t").append(Farmer.super.name)
                 .append("\t| ATK:\t").append(Farmer.super.attack)
                 .append("\t| HP:\t").append(Farmer.super.hp)
-                .append("\t|\t\t\t|");
+                .append("\t| Arrows: ").append(Farmer.this.cartridges)
+                .append("\t|").append("\t| (X.Y) : ").append(Farmer.super.coords.posX).append(".").append(Farmer.super.coords.posY);
     }
 }

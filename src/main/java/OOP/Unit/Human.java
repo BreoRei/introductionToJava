@@ -1,16 +1,21 @@
 package OOP.Unit;
 
-public abstract class Human implements GameInterfase{
-    protected String name;
-    protected Float hp;
-    protected Integer maxHp;
-    protected Integer attack;
-    protected Integer damageMin;
-    protected Integer damageMax;
-    protected Integer defense;
-    protected Integer speed;
+import java.util.ArrayList;
 
-    public Human(String name, Float hp, Integer maxHp, Integer attack, Integer damageMin, Integer damageMax, Integer defense, Integer speed) {
+public abstract class Human implements GameInterfase {
+    protected String name;
+    protected float hp;
+    protected int maxHp;
+    protected int attack;
+    protected int damageMin;
+    protected int damageMax;
+    protected int defense;
+    protected int speed;
+    protected Vector2D coords;
+    protected Farmer farmer;
+
+    protected Human(String name, float hp, int maxHp, int attack, int damageMin,
+                 int damageMax, int defense, int speed, int posX, int posY) {
         this.name = name;
         this.hp = hp;
         this.maxHp = maxHp;
@@ -19,22 +24,46 @@ public abstract class Human implements GameInterfase{
         this.damageMax = damageMax;
         this.defense = defense;
         this.speed = speed;
+        coords = new Vector2D(posX, posY);
     }
 
-    public Integer getAttack() {
+    public int getAttack() {
         return attack;
     }
-    public Integer getDefense() { return defense; }
-    public Integer getDamageMin() { return damageMin; }
-
-    public Integer getDamageMax() { return damageMax; }
-    public Integer getSpeed() { return speed; }
+    public int getDefense() { return defense; }
+    public int getSpeed() { return speed; }
+    public float getHp () { return hp; }
+    public float setHp (float p) { return hp-p; }
 
     @Override
-    public void step() {}
+    public void step(ArrayList<Human> team1, ArrayList<Human> team2) { }
 
-//    @Override
-//    public StringBuilder getInfo() {
-//        return null;
-//    }
+
+    public void makeDamage (Human unit) {}
+
+    public int findNearest(ArrayList<Human> team){
+        double min = 100;
+        int index = 0;
+        for (int i = 0; i < team.size(); i++) {
+            if(min > coords.getDistance(team.get(i).coords)) {
+                index = i;
+                min = coords.getDistance(team.get(i).coords);
+            }
+        }
+        return index;
+    }
+    public static ArrayList<Human> findLive(ArrayList<Human> team) {
+        ArrayList findLive = new ArrayList<>();
+        for (int i = 0; i < team.size(); i++) {
+            if (team.get(i).getHp() > 0 ) {
+                findLive.add(team.get(i));
+            }
+        }
+        return findLive;
+    }
+
+    @Override
+    public StringBuilder getInfo() {
+        return null;
+    }
 }

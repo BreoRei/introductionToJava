@@ -2,16 +2,17 @@ package OOP.Unit;
 
 public class Witch extends Mag{
 
-    public Witch(String name, Float hp, Integer maxHp, Integer attack, Integer damageMin, Integer damageMax,
-                 Integer defense, Integer speed, Integer mana, Integer maxMana) {
-        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed, mana, maxMana);
+    public Witch(String name, float hp, int maxHp, int attack, int damageMin, int damageMax,
+                 int defense, int speed, int mana, int maxMana, int posX, int posY ) {
+        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed, mana, maxMana, posX, posY);
     }
-    public Witch(String name) {
-        super(name, 130.f, 130, 15, 15, 5, 2, 60, 6 ,5);
+    public Witch(String name, Vector2D coords) {
+        super(name, 130.f, 130, 15, 15, 5, 2,
+                6, 6 ,5, coords.posX, coords.posY);
     }
 
     @Override
-    public Integer getAttack() {
+    public int getAttack() {
         return attack;
     }
 
@@ -22,6 +23,6 @@ public class Witch extends Mag{
                 .append("\t| ATK:\t").append(Witch.super.attack)
                 .append("\t| HP:\t").append(Witch.super.hp)
                 .append("\t| MP:\t").append(Witch.super.mana)
-                .append("\t|");
+                .append("\t|").append("\t| (X.Y) : ").append(Witch.super.coords.posX).append(".").append(Witch.super.coords.posY);
     }
 }

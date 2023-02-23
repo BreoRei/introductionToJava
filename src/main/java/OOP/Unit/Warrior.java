@@ -1,14 +1,16 @@
 package OOP.Unit;
 
-public abstract class Warrior extends Human{
+import OOP.Unit.Human;
 
-    public Warrior(String name, Float hp, Integer maxHp, Integer attack, Integer damageMin, Integer damageMax, Integer defense, Integer speed) {
-        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed);
+public abstract class Warrior extends Human {
+
+    public Warrior(String name, float hp, int maxHp, int attack, int damageMin, int damageMax, int defense, int speed, int posX, int posY) {
+        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed, posX, posY);
     }
 
     //    Атака ближнего боя
     @Override
-    public Integer getAttack() {
+    public int getAttack() {
         return attack;
     }
 }

@@ -1,17 +1,18 @@
 package OOP.Unit;
 
-public class Crossbowman extends Shooter{
+public class Crossbowman extends Shooter {
 
-    public Crossbowman(String name, Float hp, Integer maxHp, Integer attack, Integer damage,Integer damageMin, Integer damageMax, Integer defense, Integer speed, Integer cartridges, Integer range) {
-        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed, cartridges, range);
+    protected Crossbowman(String name, float hp, int maxHp, int attack, int damageMin, int damageMax, int defense,
+                       int speed, int cartridges, int range, int posX, int posY) {
+        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed, cartridges, range, posX, posY);
     }
 
-    public Crossbowman(String name) {
-        super(name, 110.f, 110, 20, 20, 10, 6,5, 6, 5);
+    public Crossbowman(String name, Vector2D coords) {
+        super(name, 110.f, 110, 20, 20, 10, 6,
+                5, 6, 5, coords.posX, coords.posY);
     }
-
     @Override
-    public Integer getAttack() { return attack; }
+    public int getAttack() { return attack; }
 
     @Override
     public StringBuilder getInfo() {
@@ -20,6 +21,6 @@ public class Crossbowman extends Shooter{
                 .append("\t| ATK:\t").append(Crossbowman.super.attack)
                 .append("\t| HP:\t").append(Crossbowman.super.hp)
                 .append("\t| Arrows: ").append(Crossbowman.super.cartridges)
-                .append("\t|");
+                .append("\t|").append("\t| (X.Y) : ").append(Crossbowman.super.coords.posX).append(".").append(Crossbowman.super.coords.posY);
     }
 }

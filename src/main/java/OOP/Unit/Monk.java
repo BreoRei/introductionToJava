@@ -3,16 +3,17 @@ package OOP.Unit;
 public class Monk extends Mag{
 
     int FreezeStep;
-    public Monk(String name, Float hp, Integer maxHp, Integer attack, Integer damageMin, Integer damageMax,
-                Integer defense, Integer speed, Integer mana, Integer maxMana) {
-        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed, mana, maxMana);
+    public Monk(String name, float hp, int maxHp, int attack, int damageMin, int damageMax,
+                int defense, int speed, int mana, int maxMana, int posX, int posY) {
+        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed, mana, maxMana, posX, posY);
         this.FreezeStep = FreezeStep;
     }
-    public Monk(String name) {
-        super(name, 130.f, 130, 15, 15, 5, 2, 60, 6 ,5);
+    public Monk(String name, Vector2D coords) {
+        super(name, 130.f, 130, 15, 15, 5, 2,
+                60, 6 ,5, coords.posX, coords.posY);
         this.FreezeStep = 7;
     }
-    public Integer FreezeWitch(Witch witch){
+    public int FreezeWitch(Witch witch){
         return FreezeStep;
     }
 
@@ -23,6 +24,6 @@ public class Monk extends Mag{
                 .append("\t| ATK:\t").append(Monk.super.attack)
                 .append("\t| HP:\t").append(Monk.super.hp)
                 .append("\t| MP:\t").append(Monk.super.mana)
-                .append("\t|");
+                .append("\t|").append("\t| (X.Y) : ").append(Monk.super.coords.posX).append(".").append(Monk.super.coords.posY);
     }
 }
