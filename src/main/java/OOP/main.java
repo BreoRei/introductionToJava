@@ -3,16 +3,18 @@ package OOP;
 import OOP.Unit.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
 public class main {
+    static final int UNITS = 10;
     public static void main(String[] args) {
 
         ArrayList<Human> holyTeam = new ArrayList<>();
         ArrayList<Human> darkTeam = new ArrayList<>();
         ArrayList<Human> allTeam = new ArrayList<>();
         String game = "";
-        Scanner user_input = new Scanner(System.in, "Cp1251");
+        Scanner user_input = new Scanner(System.in);
         createTeam(holyTeam, 1, 5, 1);
         createTeam(darkTeam, 4, 8, 10);
         allTeam.addAll(holyTeam);
@@ -21,11 +23,23 @@ public class main {
         sortTeam(darkTeam);
         sortTeam(allTeam);
 
+
+
         while (game == "") {
             if (Human.findLive(holyTeam).size() != 0 && Human.findLive(darkTeam).size() != 0) {
+                sortTeam(holyTeam);
+                sortTeam(darkTeam);
                 getTeam(holyTeam);
                 getTeam(darkTeam);
-                allTeam.forEach(n->n.step(Human.findLive(holyTeam),Human.findLive(darkTeam)));//
+                for (Human human: allTeam) {
+                    if (holyTeam.contains(human)) {
+                        human.step(Human.findLive(holyTeam), Human.findLive(darkTeam));
+                    } else {
+                        human.step(Human.findLive(darkTeam), Human.findLive(holyTeam));
+                    }
+                }
+//                allTeam.forEach(n-> holyTeam.contains(n)?n.step(Human.findLive(holyTeam),Human.findLive(darkTeam)):
+//                        n.step(Human.findLive(darkTeam),Human.findLive(holyTeam)));
                 game = user_input.nextLine();
             } else {
                 searchWinner(holyTeam, darkTeam);
@@ -33,8 +47,7 @@ public class main {
         }
     }
     static void createTeam (ArrayList team, int start, int end, int posY) {
-        int units = 10;
-        for (int i = 0; i < units; i++) {
+        for (int i = 0; i < UNITS; i++) {
             int rnd = new Random().nextInt(start, end);
             switch (rnd) {
                 case (1):
@@ -69,7 +82,13 @@ public class main {
         printingLine();
     }
     static void sortTeam (ArrayList<Human> team){
-        team.sort((o1, o2) -> o2.getSpeed() - o1.getSpeed());
+        team.sort(new Comparator<Human>() {
+            @Override
+            public int compare(Human o1, Human o2) {
+                if (o2.getSpeed() == o1.getSpeed()) return (int) (o2.getHp() - o1.getHp());
+                else return o2.getSpeed() - o1.getSpeed();
+            }
+        });
     }
     static String getName() {
         String name = String.valueOf(Names.values()[new Random().nextInt(Names.values().length-1)]);

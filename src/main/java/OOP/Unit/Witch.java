@@ -1,5 +1,7 @@
 package OOP.Unit;
 
+import java.util.ArrayList;
+
 public class Witch extends Mag{
 
     public Witch(String name, float hp, int maxHp, int attack, int damageMin, int damageMax,
@@ -8,14 +10,8 @@ public class Witch extends Mag{
     }
     public Witch(String name, Vector2D coords) {
         super(name, 50.f, 50, 9, -6, -6, 3,
-                7, 5,5, coords.posX, coords.posY);
+                7, 50,50, coords.posX, coords.posY);
     }
-
-    @Override
-    public int getAttack() {
-        return attack;
-    }
-
     @Override
     public StringBuilder getInfo() {
         StringBuilder builder = new StringBuilder();

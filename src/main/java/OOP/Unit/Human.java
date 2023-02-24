@@ -12,7 +12,6 @@ public abstract class Human implements GameInterfase {
     protected int defense;
     protected int speed;
     protected Vector2D coords;
-    protected Farmer farmer;
 
     protected Human(String name, float hp, int maxHp, int attack, int damageMin,
                  int damageMax, int defense, int speed, int posX, int posY) {
@@ -33,15 +32,26 @@ public abstract class Human implements GameInterfase {
     public int getDefense() { return this.defense; }
     public int getSpeed() { return this.speed; }
     public float getHp () { return this.hp; }
-    public float setHp (float hp) { return this.hp = hp; }
+    public void setHp (float hp) { this.hp = hp; }
+    public int getMaxHp () { return this.maxHp;}
 
     @Override
     public void step(ArrayList<Human> team1, ArrayList<Human> team2) { }
 
+    public void makeDamage (Human unit) {
+        int damage = unit.getDefense() - attack;
+        float hp;
+        if(damage < 0) {
+            hp = unit.getHp() - damageMax;
+        } else if (damage > 0) {
+            hp = unit.getHp() - damageMin;
+        } else {
+            hp = unit.getHp() - ((damageMax+damageMin)/2);
+        }
+        unit.setHp(hp < 0 ? 0: hp);
+    }
 
-    public void makeDamage (Human unit) {}
-
-    public int findNearest(ArrayList<Human> team){
+    protected int findNearest(ArrayList<Human> team){
         double min = 100;
         int index = 0;
         for (int i = 0; i < team.size(); i++) {
@@ -53,10 +63,10 @@ public abstract class Human implements GameInterfase {
         return index;
     }
     public static ArrayList<Human> findLive(ArrayList<Human> team) {
-        ArrayList findLive = new ArrayList<>();
-        for (int i = 0; i < team.size(); i++) {
-            if (team.get(i).getHp() > 0 ) {
-                findLive.add(team.get(i));
+        ArrayList <Human> findLive = new ArrayList<>();
+        for (Human human : team) {
+            if (human.getHp() > 0) {
+                findLive.add(human);
             }
         }
         return findLive;

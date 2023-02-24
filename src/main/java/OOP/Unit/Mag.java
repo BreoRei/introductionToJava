@@ -1,6 +1,6 @@
 package OOP.Unit;
 
-import OOP.Unit.Human;
+import java.util.ArrayList;
 
 public abstract class Mag extends Human {
     protected int mana;
@@ -11,7 +11,28 @@ public abstract class Mag extends Human {
         this.mana = mana;
         this.maxMana = maxMana;
     }
-
-//    public int healing (int damage, Human human){ return hp;}
-
+    @Override
+    public void step(ArrayList<Human> team1, ArrayList<Human> team2) {
+        ArrayList <Human> findLive = super.findLive(team1);
+        if (hp > 0) {
+            mana = ((mana += 2) > maxMana) ? maxMana : mana + 2;
+            if (mana > 9){
+                for (Human human : findLive) {
+                    if (human.getHp() < human.getMaxHp()) {
+                        healing(human);
+                        mana -= 10;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+    protected void healing(Human human) {
+        float newHp = human.getHp()-damageMax;
+        if (newHp > human.getMaxHp()) {
+            human.setHp(human.getMaxHp());
+        } else {
+            human.setHp(newHp);
+        }
+    }
 }
