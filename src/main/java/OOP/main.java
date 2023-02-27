@@ -2,10 +2,8 @@ package OOP;
 
 import OOP.Unit.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+
 public class main {
     static final int UNITS = 10;
     public static void main(String[] args) {
@@ -13,40 +11,38 @@ public class main {
         ArrayList<Human> holyTeam = new ArrayList<>();
         ArrayList<Human> darkTeam = new ArrayList<>();
         ArrayList<Human> allTeam = new ArrayList<>();
-        String game = "";
         Scanner user_input = new Scanner(System.in);
-        createTeam(holyTeam, 1, 5, 1);
-        createTeam(darkTeam, 4, 8, 10);
-        allTeam.addAll(holyTeam);
-        allTeam.addAll(darkTeam);
+        createTeam(darkTeam, 1, 5, 1);
+        createTeam(holyTeam, 4, 8, 10);
         sortTeam(holyTeam);
         sortTeam(darkTeam);
-        sortTeam(allTeam);
+        ArrayList<Human> holyLive = new ArrayList<>(holyTeam);
+        ArrayList<Human> darkLive = new ArrayList<>(darkTeam);
+        allTeam.addAll(holyLive);
+        allTeam.addAll(darkLive);
 
-
-
-        while (game == "") {
-            if (Human.findLive(holyTeam).size() != 0 && Human.findLive(darkTeam).size() != 0) {
-                sortTeam(holyTeam);
-                sortTeam(darkTeam);
-                getTeam(holyTeam);
-                getTeam(darkTeam);
-                for (Human human: allTeam) {
+        while (true) {
+            getTeam(holyLive);
+            getTeam(darkLive);
+            sortTeam(allTeam);
+            for (Human human: allTeam) {
+                if (holyLive.size() != 0 && darkLive.size() != 0) {
                     if (holyTeam.contains(human)) {
-                        human.step(Human.findLive(holyTeam), Human.findLive(darkTeam));
+                        human.step(holyLive, darkLive);
+                        darkLive = Human.findLive(darkTeam);
                     } else {
-                        human.step(Human.findLive(darkTeam), Human.findLive(holyTeam));
+                        human.step(darkLive, holyLive);
+                        holyLive = Human.findLive(holyTeam);
                     }
+                } else {
+                    searchWinner(holyLive.size());
+                    break;
                 }
-//                allTeam.forEach(n-> holyTeam.contains(n)?n.step(Human.findLive(holyTeam),Human.findLive(darkTeam)):
-//                        n.step(Human.findLive(darkTeam),Human.findLive(holyTeam)));
-                game = user_input.nextLine();
-            } else {
-                searchWinner(holyTeam, darkTeam);
-                break; }
+            }
+            user_input.nextLine();
         }
     }
-    static void createTeam (ArrayList team, int start, int end, int posY) {
+    static void createTeam (ArrayList <Human> team, int start, int end, int posY) {
         for (int i = 0; i < UNITS; i++) {
             int rnd = new Random().nextInt(start, end);
             switch (rnd) {
@@ -76,12 +72,12 @@ public class main {
     }
     static void getTeam(ArrayList<Human> team) {
         printingHeadlines();
-        for (int i = 0; i < team.size(); i++) {
-            System.out.println(team.get(i).getInfo());
+        for (Human human : team) {
+            System.out.println(human.getInfo());
         }
         printingLine();
     }
-    static void sortTeam (ArrayList<Human> team){
+    static void sortTeam (ArrayList<Human> team) {
         team.sort(new Comparator<Human>() {
             @Override
             public int compare(Human o1, Human o2) {
@@ -91,20 +87,29 @@ public class main {
         });
     }
     static String getName() {
-        String name = String.valueOf(Names.values()[new Random().nextInt(Names.values().length-1)]);
-        return name;
+        return String.valueOf(Names.values()[new Random().nextInt(Names.values().length-1)]);
     }
     static void printingLine() {
-        System.out.println("*************************************************************");
+        System.out.println("*****************************************************************************");
     }
     static void printingHeadlines() {
-        System.out.println("*************************************************************");
-        System.out.println("Класс       Имя     |    ATK    |      HP       |           |" );
-        System.out.println("*************************************************************");
+        System.out.println("*****************************************************************************");
+        System.out.println("Класс       Имя     |    ATK    |      HP       |           |  coordinates  |" );
+        System.out.println("*****************************************************************************");
     }
-    static void searchWinner (ArrayList<Human> holyTeam, ArrayList<Human> darkTeam) {
-        int holySize = Human.findLive(holyTeam).size();
-        int darkSize = Human.findLive(darkTeam).size();
-        System.out.println(holySize > darkSize?"Победила команда Света":"Победила команда Тьмы");
+    static void searchWinner (int teamSize) {
+        System.out.println("*************************************************************\t");
+        System.out.println("*                                                           *\t");
+        System.out.println("*                                                           *\t");
+        System.out.println("*                                                           *\t");
+        System.out.println("*                                                           *\t");
+        System.out.printf("*                  %s                   *%n",
+                teamSize == 0? "Победила команда Тьмы " : "Победила команда Света");
+        System.out.println("*                                                           *\t");
+        System.out.println("*                                                           *\t");
+        System.out.println("*                                                           *\t");
+        System.out.println("*                                                           *\t");
+        System.out.println("*************************************************************\t");
+
     }
 }

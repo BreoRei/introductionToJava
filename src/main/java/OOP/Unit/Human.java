@@ -12,9 +12,10 @@ public abstract class Human implements GameInterfase {
     protected int defense;
     protected int speed;
     protected Vector2D coords;
+    protected String state;
 
-    protected Human(String name, float hp, int maxHp, int attack, int damageMin,
-                 int damageMax, int defense, int speed, int posX, int posY) {
+    protected Human(String name, float hp, int maxHp, int attack, int damageMin, int damageMax,
+                    int defense, int speed, int posX, int posY) {
         this.name = name;
         this.hp = hp;
         this.maxHp = maxHp;
@@ -24,10 +25,7 @@ public abstract class Human implements GameInterfase {
         this.defense = defense;
         this.speed = speed;
         coords = new Vector2D(posX, posY);
-    }
-
-    public int getAttack() {
-        return this.attack;
+        this.state = "Stand";
     }
     public int getDefense() { return this.defense; }
     public int getSpeed() { return this.speed; }
@@ -38,7 +36,7 @@ public abstract class Human implements GameInterfase {
     @Override
     public void step(ArrayList<Human> team1, ArrayList<Human> team2) { }
 
-    public void makeDamage (Human unit) {
+    protected void makeDamage (Human unit) {
         int damage = unit.getDefense() - attack;
         float hp;
         if(damage < 0) {
@@ -48,7 +46,12 @@ public abstract class Human implements GameInterfase {
         } else {
             hp = unit.getHp() - ((damageMax+damageMin)/2);
         }
-        unit.setHp(hp < 0 ? 0: hp);
+        if (hp <= 0) {
+            unit.state = "Die";
+            unit.setHp(0);
+        } else {
+            unit.setHp(hp);
+        }
     }
 
     protected int findNearest(ArrayList<Human> team){
@@ -65,15 +68,10 @@ public abstract class Human implements GameInterfase {
     public static ArrayList<Human> findLive(ArrayList<Human> team) {
         ArrayList <Human> findLive = new ArrayList<>();
         for (Human human : team) {
-            if (human.getHp() > 0) {
+            if (human.state.equals("Stand")|| human.state.equals("Empty")) {
                 findLive.add(human);
             }
         }
         return findLive;
-    }
-
-    @Override
-    public StringBuilder getInfo() {
-        return null;
     }
 }

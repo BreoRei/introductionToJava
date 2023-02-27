@@ -13,19 +13,36 @@ public abstract class Mag extends Human {
     }
     @Override
     public void step(ArrayList<Human> team1, ArrayList<Human> team2) {
-        ArrayList <Human> findLive = super.findLive(team1);
-        if (hp > 0) {
-            mana = ((mana += 2) > maxMana) ? maxMana : mana + 2;
-            if (mana > 9){
-                for (Human human : findLive) {
-                    if (human.getHp() < human.getMaxHp()) {
-                        healing(human);
-                        mana -= 10;
-                        return;
-                    }
+        if (state.equals("Die")) return;
+        if (mana > 4){
+            for (Human human : team1) {
+                if (human.hp < human.maxHp) {
+                    healing(human);
+                    mana -= 5;
+                    return;
                 }
             }
+        } else {
+            int index = findNearest(team2);
+            if (team2.get(index).hp - 1 <= 0) {
+                team2.get(index).state = "Die";
+                team2.get(index).hp = 0;
+            } else {
+                team2.get(index).hp -= 1;
+            }
         }
+    }
+    @Override
+    public StringBuilder getInfo() {
+        StringBuilder builder = new StringBuilder(getProfession());
+        return builder.append(":  \t").append(name)
+                .append("\t| ATK:\t").append(attack)
+                .append("\t| HP:\t").append(hp)
+                .append(" \t| MP:\t").append(mana)
+                .append("\t|")
+                .append("  (X:Y): ")
+                .append(coords.posX).append(":").append(coords.posY)
+                .append("\t|");
     }
     protected void healing(Human human) {
         float newHp = human.getHp()-damageMax;

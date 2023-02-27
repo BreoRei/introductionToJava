@@ -3,29 +3,39 @@ package OOP.Unit;
 import java.util.ArrayList;
 
 public class Farmer extends Human {
-    protected int cartridges;
     public Farmer(String name, Vector2D coords) {
         super(name, 50.f, 50, 1, 1, 1, 1,
                 3, coords.posX, coords.posY);
-        this.cartridges = 1;
-    }
-    public int getCartridgesFarmer () {
-        return this.cartridges;
-    }
-    public void setCartridgesFarmer (int cartridges) {
-        this.cartridges = cartridges;
     }
     @Override
     public StringBuilder getInfo() {
-        StringBuilder builder = new StringBuilder();
-        return builder.append("Фермер: \t").append(Farmer.super.name)
-                .append("\t| ATK:\t").append(Farmer.super.attack)
-                .append("\t| HP:\t").append(Farmer.super.hp)
-                .append(" \t| Arrows: ").append(Farmer.this.cartridges)
-                .append("\t|").append("\t| (X.Y) : ").append(Farmer.super.coords.posX).append(".").append(Farmer.super.coords.posY);
+        StringBuilder builder = new StringBuilder(getProfession());
+        return builder.append(": \t").append(name)
+                .append("\t| ATK:\t").append(attack)
+                .append("\t| HP:\t").append(hp)
+                .append(" \t|\t\t\t|")
+                .append("  (X:Y): ")
+                .append(coords.posX).append(":").append(coords.posY)
+                .append("\t|");
+    }
+    @Override
+    public String getProfession() {
+        return "Фермер";
     }
     @Override
     public void step(ArrayList<Human> team1, ArrayList<Human> team2) {
-        cartridges = 1;
+        if (state.equals("Die")) return;
+        if (state.equals("Empty")) {
+            state = "Stand";
+        } else {
+            state = "Stand";
+            int index = findNearest(team2);
+            if (team2.get(index).hp - 1 <= 0) {
+                team2.get(index).state = "Die";
+                team2.get(index).hp = 0;
+            } else {
+                team2.get(index).hp -= 1;
+            }
+        }
     }
 }
