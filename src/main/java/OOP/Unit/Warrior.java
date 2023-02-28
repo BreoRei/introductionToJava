@@ -14,7 +14,6 @@ public abstract class Warrior extends Human {
         if (state.equals("Die")) return;
         int index = findNearest(team2);
         Human enemy = team2.get(index);
-        System.out.println(coords.getDistance(enemy.coords));
         if (coords.getDistance(enemy.coords) < 2) {
             makeDamage(team2.get(index));
             return;
@@ -60,8 +59,8 @@ public abstract class Warrior extends Human {
                 .append("\t| ATK:\t").append(attack)
                 .append("\t| HP:\t").append(hp)
                 .append(" \t|\t\t\t|")
-                .append("  (X:Y): ")
-                .append(coords.posX).append(":").append(coords.posY)
+//                .append("  (X:Y): ")
+//                .append(coords.posX).append(":").append(coords.posY)
                 .append("\t|");
     }
 }

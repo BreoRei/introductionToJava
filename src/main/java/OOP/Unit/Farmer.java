@@ -14,8 +14,8 @@ public class Farmer extends Human {
                 .append("\t| ATK:\t").append(attack)
                 .append("\t| HP:\t").append(hp)
                 .append(" \t|\t\t\t|")
-                .append("  (X:Y): ")
-                .append(coords.posX).append(":").append(coords.posY)
+//                .append("  (X:Y): ")
+//                .append(coords.posX).append(":").append(coords.posY)
                 .append("\t|");
     }
     @Override

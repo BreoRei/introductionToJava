@@ -6,11 +6,12 @@ import java.util.*;
 
 public class main {
     static final int UNITS = 10;
+    public static ArrayList<Human> allTeam = new ArrayList<>();
+    public static ArrayList<Human> holyTeam = new ArrayList<>();
+    public static ArrayList<Human> darkTeam = new ArrayList<>();
+
     public static void main(String[] args) {
 
-        ArrayList<Human> holyTeam = new ArrayList<>();
-        ArrayList<Human> darkTeam = new ArrayList<>();
-        ArrayList<Human> allTeam = new ArrayList<>();
         Scanner user_input = new Scanner(System.in);
         createTeam(darkTeam, 1, 5, 1);
         createTeam(holyTeam, 4, 8, 10);
@@ -22,8 +23,8 @@ public class main {
         allTeam.addAll(darkLive);
 
         while (true) {
-            getTeam(holyLive);
-            getTeam(darkLive);
+            View.view();
+            user_input.nextLine();
             sortTeam(allTeam);
             for (Human human: allTeam) {
                 if (holyLive.size() != 0 && darkLive.size() != 0) {
@@ -35,11 +36,10 @@ public class main {
                         holyLive = findLive(holyTeam);
                     }
                 } else {
-                    searchWinner(holyLive.size());
-                    break;
+                    View.searchWinner(holyLive.size());
+                    return;
                 }
             }
-            user_input.nextLine();
         }
     }
     static void createTeam (ArrayList <Human> team, int start, int end, int posY) {
@@ -70,13 +70,6 @@ public class main {
             }
         }
     }
-    static void getTeam(ArrayList<Human> team) {
-        printingHeadlines();
-        for (Human human : team) {
-            System.out.println(human.getInfo());
-        }
-        printingLine();
-    }
     static void sortTeam (ArrayList<Human> team) {
         team.sort(new Comparator<Human>() {
             @Override
@@ -97,28 +90,5 @@ public class main {
     }
     static String getName() {
         return String.valueOf(Names.values()[new Random().nextInt(Names.values().length-1)]);
-    }
-    static void printingLine() {
-        System.out.println("*****************************************************************************");
-    }
-    static void printingHeadlines() {
-        System.out.println("*****************************************************************************");
-        System.out.println("Класс       Имя     |    ATK    |      HP       |           |  coordinates  |" );
-        System.out.println("*****************************************************************************");
-    }
-    static void searchWinner (int teamSize) {
-        System.out.println("*****************************************************************************\t");
-        System.out.println("*                                                                           *\t");
-        System.out.println("*                                                                           *\t");
-        System.out.println("*                                                                           *\t");
-        System.out.println("*                                                                           *\t");
-        System.out.printf("*                           %s                          *%n",
-                teamSize == 0? "Победила команда Тьмы " : "Победила команда Света");
-        System.out.println("*                                                                           *\t");
-        System.out.println("*                                                                           *\t");
-        System.out.println("*                                                                           *\t");
-        System.out.println("*                                                                           *\t");
-        System.out.println("*****************************************************************************\t");
-
     }
 }

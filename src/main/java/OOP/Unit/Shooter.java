@@ -30,9 +30,19 @@ public abstract class Shooter extends Human {
                 .append("\t| HP:\t").append(hp)
                 .append(" \t| Arrows:").append(arrows)
                 .append("\t|")
-                .append("  (X:Y): ")
-                .append(coords.posX).append(":").append(coords.posY)
+//                .append("  (X:Y): ")
+//                .append(coords.posX).append(":").append(coords.posY)
                 .append("\t|");
+    }
+    @Override
+    public String toString() {
+        return name +
+                "\t| H:" + Math.round(hp) +
+                "\tD:" + defense +
+                " \tA:" + attack +
+                " \tDmg:" + Math.round(Math.abs((damageMin+damageMax)/2)) + "\t" +
+                state +
+                " \tShots:" + arrows;
     }
     protected boolean findFarmer(ArrayList<Human> team) {
         ArrayList<Human> arrayFarmer = new ArrayList<>();

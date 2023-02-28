@@ -33,6 +33,16 @@ public abstract class Mag extends Human {
         }
     }
     @Override
+    public String toString() {
+        return name +
+                "\t| H:" + Math.round(hp) +
+                "\tD:" + defense +
+                " \tA:" + attack +
+                " \tDmg:" + Math.round(Math.abs((damageMin+damageMax)/2)) + "\t" +
+                state +
+                " \tShots:" + mana;
+    }
+    @Override
     public StringBuilder getInfo() {
         StringBuilder builder = new StringBuilder(getProfession());
         return builder.append(":  \t").append(name)
@@ -40,8 +50,8 @@ public abstract class Mag extends Human {
                 .append("\t| HP:\t").append(hp)
                 .append(" \t| MP:\t").append(mana)
                 .append("\t|")
-                .append("  (X:Y): ")
-                .append(coords.posX).append(":").append(coords.posY)
+//                .append("  (X:Y): ")
+//                .append(coords.posX).append(":").append(coords.posY)
                 .append("\t|");
     }
     protected void healing(Human human) {

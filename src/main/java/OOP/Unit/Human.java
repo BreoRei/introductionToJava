@@ -33,9 +33,6 @@ public abstract class Human implements GameInterfase {
     public void setHp (float hp) { this.hp = hp; }
     public int getMaxHp () { return this.maxHp;}
 
-    @Override
-    public void step(ArrayList<Human> team1, ArrayList<Human> team2) { }
-
     protected void makeDamage (Human unit) {
         int damage = unit.getDefense() - attack;
         float hp;
@@ -64,5 +61,16 @@ public abstract class Human implements GameInterfase {
             }
         }
         return index;
+    }
+    public int[] getCoords() { return new int[]{coords.posX, coords.posY};}
+    @Override
+    public String toString() {
+        return name +
+                "\t| H:" + Math.round(hp) +
+                "\tD:" + defense +
+                " \tA:" + attack +
+                " \tDmg:" + Math.round(Math.abs((damageMin+damageMax)/2)) + "\t" +
+                state +"  \t"+
+                "\t\t";
     }
 }
