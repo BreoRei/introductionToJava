@@ -25,17 +25,6 @@ public class Farmer extends Human {
     @Override
     public void step(ArrayList<Human> team1, ArrayList<Human> team2) {
         if (state.equals("Die")) return;
-        if (state.equals("Empty")) {
-            state = "Stand";
-        } else {
-            state = "Stand";
-            int index = findNearest(team2);
-            if (team2.get(index).hp - 1 <= 0) {
-                team2.get(index).state = "Die";
-                team2.get(index).hp = 0;
-            } else {
-                team2.get(index).hp -= 1;
-            }
-        }
+        if (state.equals("Empty")) state = "Stand";
     }
 }

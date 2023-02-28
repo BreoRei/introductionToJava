@@ -29,10 +29,10 @@ public class main {
                 if (holyLive.size() != 0 && darkLive.size() != 0) {
                     if (holyTeam.contains(human)) {
                         human.step(holyLive, darkLive);
-                        darkLive = Human.findLive(darkTeam);
+                        darkLive = findLive(darkTeam);
                     } else {
                         human.step(darkLive, holyLive);
-                        holyLive = Human.findLive(holyTeam);
+                        holyLive = findLive(holyTeam);
                     }
                 } else {
                     searchWinner(holyLive.size());
@@ -86,6 +86,15 @@ public class main {
             }
         });
     }
+    static ArrayList<Human> findLive(ArrayList<Human> team) {
+        ArrayList <Human> findLive = new ArrayList<>();
+        for (Human human : team) {
+            if (human.state.equals("Stand")|| human.state.equals("Empty")) {
+                findLive.add(human);
+            }
+        }
+        return findLive;
+    }
     static String getName() {
         return String.valueOf(Names.values()[new Random().nextInt(Names.values().length-1)]);
     }
@@ -98,18 +107,18 @@ public class main {
         System.out.println("*****************************************************************************");
     }
     static void searchWinner (int teamSize) {
-        System.out.println("*************************************************************\t");
-        System.out.println("*                                                           *\t");
-        System.out.println("*                                                           *\t");
-        System.out.println("*                                                           *\t");
-        System.out.println("*                                                           *\t");
-        System.out.printf("*                  %s                   *%n",
+        System.out.println("*****************************************************************************\t");
+        System.out.println("*                                                                           *\t");
+        System.out.println("*                                                                           *\t");
+        System.out.println("*                                                                           *\t");
+        System.out.println("*                                                                           *\t");
+        System.out.printf("*                           %s                          *%n",
                 teamSize == 0? "Победила команда Тьмы " : "Победила команда Света");
-        System.out.println("*                                                           *\t");
-        System.out.println("*                                                           *\t");
-        System.out.println("*                                                           *\t");
-        System.out.println("*                                                           *\t");
-        System.out.println("*************************************************************\t");
+        System.out.println("*                                                                           *\t");
+        System.out.println("*                                                                           *\t");
+        System.out.println("*                                                                           *\t");
+        System.out.println("*                                                                           *\t");
+        System.out.println("*****************************************************************************\t");
 
     }
 }

@@ -12,7 +12,7 @@ public abstract class Human implements GameInterfase {
     protected int defense;
     protected int speed;
     protected Vector2D coords;
-    protected String state;
+    public String state;
 
     protected Human(String name, float hp, int maxHp, int attack, int damageMin, int damageMax,
                     int defense, int speed, int posX, int posY) {
@@ -64,14 +64,5 @@ public abstract class Human implements GameInterfase {
             }
         }
         return index;
-    }
-    public static ArrayList<Human> findLive(ArrayList<Human> team) {
-        ArrayList <Human> findLive = new ArrayList<>();
-        for (Human human : team) {
-            if (human.state.equals("Stand")|| human.state.equals("Empty")) {
-                findLive.add(human);
-            }
-        }
-        return findLive;
     }
 }
