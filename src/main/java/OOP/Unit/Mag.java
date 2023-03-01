@@ -40,7 +40,7 @@ public abstract class Mag extends Human {
                 " \tA:" + attack +
                 " \tDmg:" + Math.round(Math.abs((damageMin+damageMax)/2)) + "\t" +
                 state +
-                " \tShots:" + mana;
+                " \tMana:" + mana + " ";
     }
     @Override
     public StringBuilder getInfo() {
