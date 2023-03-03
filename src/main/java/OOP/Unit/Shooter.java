@@ -13,7 +13,7 @@ public abstract class Shooter extends Human {
         this.arrows = arrows;
     }
     @Override
-    public void step(ArrayList<Human> team1, ArrayList<Human> team2) {
+    public void step(ArrayList<Human> team1, ArrayList<Human> team2, ArrayList<Barrier> barriers) {
         if (state.equals("Die") || arrows == 0) return;
         int index = findNearest(team2);
         makeDamage(team2.get(index));
@@ -30,19 +30,17 @@ public abstract class Shooter extends Human {
                 .append("\t| HP:\t").append(hp)
                 .append(" \t| Arrows:").append(arrows)
                 .append("\t|")
-//                .append("  (X:Y): ")
-//                .append(coords.posX).append(":").append(coords.posY)
                 .append("\t|");
     }
     @Override
     public String toString() {
-        return name +
-                "\t| H:" + Math.round(hp) +
-                "\tD:" + defense +
-                " \tA:" + attack +
-                " \tDmg:" + Math.round(Math.abs((damageMin+damageMax)/2)) + "\t" +
-                state +
-                " \tShots:" + arrows;
+        return name + "\t" +
+                getEmoji() +
+                "\t| \uD83E\uDE78:" + Math.round(hp) +
+                "\t\uD83D\uDEE1:" + defense +
+                " \t\uD83C\uDFF9:" + attack +
+                " \t\uD83D\uDCA5:" + Math.round(Math.abs((damageMin+damageMax)/2)) +
+                " \t\uD83E\uDEA0:" + arrows;
     }
     protected boolean findFarmer(ArrayList<Human> team) {
         ArrayList<Human> arrayFarmer = new ArrayList<>();

@@ -12,7 +12,7 @@ public abstract class Mag extends Human {
         this.maxMana = maxMana;
     }
     @Override
-    public void step(ArrayList<Human> team1, ArrayList<Human> team2) {
+    public void step(ArrayList<Human> team1, ArrayList<Human> team2, ArrayList<Barrier> barriers) {
         if (state.equals("Die")) return;
         if (mana > 4){
             for (Human human : team1) {
@@ -34,13 +34,13 @@ public abstract class Mag extends Human {
     }
     @Override
     public String toString() {
-        return name +
-                "\t| H:" + Math.round(hp) +
-                "\tD:" + defense +
-                " \tA:" + attack +
-                " \tDmg:" + Math.round(Math.abs((damageMin+damageMax)/2)) + "\t" +
-                state +
-                " \tMana:" + mana + " ";
+        return name + "\t" +
+                getEmoji() +
+                "\t| \uD83E\uDE78:" + Math.round(hp) +
+                "\t\uD83D\uDEE1:" + defense +
+                " \t\uD83D\uDD2E:" + attack +
+                " \t\uD83D\uDCA5:" + Math.round(Math.abs((damageMin+damageMax)/2)) +
+                " \t\uD83D\uDCA7:" + mana + " ";
     }
     @Override
     public StringBuilder getInfo() {
@@ -50,8 +50,6 @@ public abstract class Mag extends Human {
                 .append("\t| HP:\t").append(hp)
                 .append(" \t| MP:\t").append(mana)
                 .append("\t|")
-//                .append("  (X:Y): ")
-//                .append(coords.posX).append(":").append(coords.posY)
                 .append("\t|");
     }
     protected void healing(Human human) {

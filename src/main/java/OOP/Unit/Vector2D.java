@@ -22,10 +22,16 @@ public class Vector2D {
         return opponent.posY < posY;
     }
 
-    protected boolean getEmpty(ArrayList <Human> team, int posX, int posY) {
+    protected boolean getEmpty(ArrayList <Human> team,ArrayList<Barrier> barriers, int posX, int posY) {
         boolean bool = true;
         for (Human human: team) {
             if (human.coords.posX == posX & human.coords.posY == posY) {
+                bool = false;
+                break;
+            }
+        }
+        for (Barrier barr: barriers){
+            if (barr.coords.posX == posX & barr.coords.posY == posY) {
                 bool = false;
                 break;
             }

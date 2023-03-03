@@ -9,14 +9,15 @@ public class main {
     public static ArrayList<Human> allTeam = new ArrayList<>();
     public static ArrayList<Human> holyTeam = new ArrayList<>();
     public static ArrayList<Human> darkTeam = new ArrayList<>();
+    public static ArrayList<Barrier> barrier = new ArrayList<>();
 
     public static void main(String[] args) {
-
         Scanner user_input = new Scanner(System.in);
         createTeam(darkTeam, 1, 5, 1);
         createTeam(holyTeam, 4, 8, 10);
         sortTeam(holyTeam);
         sortTeam(darkTeam);
+        createBarrier();
         ArrayList<Human> holyLive = new ArrayList<>(holyTeam);
         ArrayList<Human> darkLive = new ArrayList<>(darkTeam);
         allTeam.addAll(holyLive);
@@ -29,17 +30,26 @@ public class main {
             for (Human human: allTeam) {
                 if (holyLive.size() != 0 && darkLive.size() != 0) {
                     if (holyTeam.contains(human)) {
-                        human.step(holyLive, darkLive);
+                        human.step(holyLive, darkLive, barrier);
                         darkLive = findLive(darkTeam);
                     } else {
-                        human.step(darkLive, holyLive);
+                        human.step(darkLive, holyLive, barrier);
                         holyLive = findLive(holyTeam);
                     }
                 } else {
+                    View.view();
                     View.searchWinner(holyLive.size());
                     return;
                 }
             }
+        }
+    }
+    static void createBarrier(){
+        int rnd = new Random().nextInt(2, 5);
+        for (int i = 0; i < rnd; i++){
+            int posX = new Random().nextInt(3, 8);
+            int posY = new Random().nextInt(3, 8);
+            barrier.add(new Barrier(new Vector2D(posX,posY)));
         }
     }
     static void createTeam (ArrayList <Human> team, int start, int end, int posY) {

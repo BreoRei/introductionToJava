@@ -14,8 +14,6 @@ public class Farmer extends Human {
                 .append("\t| ATK:\t").append(attack)
                 .append("\t| HP:\t").append(hp)
                 .append(" \t|\t\t\t|")
-//                .append("  (X:Y): ")
-//                .append(coords.posX).append(":").append(coords.posY)
                 .append("\t|");
     }
     @Override
@@ -23,8 +21,13 @@ public class Farmer extends Human {
         return "Фермер";
     }
     @Override
-    public void step(ArrayList<Human> team1, ArrayList<Human> team2) {
+    public void step(ArrayList<Human> team1, ArrayList<Human> team2, ArrayList<Barrier> barriers) {
         if (state.equals("Die")) return;
         if (state.equals("Empty")) state = "Stand";
+    }
+    @Override
+    public String getEmoji() {
+        if(hp == 0) return "\uD83D\uDC80";
+        return "\uD83E\uDDD1\u200D\uD83C\uDF3E";
     }
 }

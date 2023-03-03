@@ -11,4 +11,9 @@ public class Witch extends Mag{
     public String getProfession() {
         return "Колдун";
     }
+    @Override
+    public String getEmoji() {
+        if(hp == 0) return "\uD83D\uDC80";
+        return "\u200D\uD83E\uDDDB";
+    }
 }

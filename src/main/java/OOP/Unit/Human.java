@@ -65,12 +65,15 @@ public abstract class Human implements GameInterfase {
     public int[] getCoords() { return new int[]{coords.posX, coords.posY};}
     @Override
     public String toString() {
-        return name +
-                "\t| H:" + Math.round(hp) +
-                "\tD:" + defense +
-                " \tA:" + attack +
-                " \tDmg:" + Math.round(Math.abs((damageMin+damageMax)/2)) + "\t" +
-                state +"  \t"+
+        return name + "\t" +
+                getEmoji() +
+                "\t| \uD83E\uDE78:" + Math.round(hp) +
+                "\t\uD83D\uDEE1:" + defense +
+                " \t\uD83D\uDDE1:" + attack +
+                " \t\uD83D\uDCA5:" + Math.round(Math.abs((damageMin+damageMax)/2)) +
                 "\t\t";
+    }
+    public String getEmoji() {
+        return null;
     }
 }

@@ -9,8 +9,7 @@ public abstract class Warrior extends Human {
         super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed, posX, posY);
     }
 
-    @Override
-    public void step(ArrayList<Human> team1, ArrayList<Human> team2) {
+    public void step(ArrayList<Human> team1, ArrayList<Human> team2, ArrayList<Barrier> barriers) {
         if (state.equals("Die")) return;
         int index = findNearest(team2);
         Human enemy = team2.get(index);
@@ -19,16 +18,16 @@ public abstract class Warrior extends Human {
             return;
         }
         if (coords.getDown(enemy.coords)) {
-            if (coords.posY - 1 > enemy.coords.posY && coords.getEmpty(team1, coords.posX, coords.posY - 1)) {
+            if (coords.posY - 1 > enemy.coords.posY && coords.getEmpty(team1, barriers, coords.posX, coords.posY - 1)) {
                 stepDown();
             } else {
-                sidestep(team1, enemy);
+                sidestep(team1, barriers, enemy);
             }
         }else {
-            if (coords.posY + 1 < enemy.coords.posY && coords.getEmpty(team1, coords.posX, coords.posY + 1)) {
+            if (coords.posY + 1 < enemy.coords.posY && coords.getEmpty(team1, barriers, coords.posX, coords.posY + 1)) {
                 stepUp();
            } else {
-                sidestep(team1, enemy);
+                sidestep(team1, barriers, enemy);
            }
        }
     }
@@ -40,13 +39,13 @@ public abstract class Warrior extends Human {
         coords.posY += 1;
     }
 
-    protected void sidestep(ArrayList<Human> team, Human enemy) {
+    protected void sidestep(ArrayList<Human> team, ArrayList<Barrier> barriers, Human enemy) {
         if (coords.getLeft(enemy.coords)) {
-            if (coords.getEmpty(team, coords.posX - 1, coords.posY)){
+            if (coords.getEmpty(team, barriers,coords.posX - 1, coords.posY)){
                 coords.posX -= 1;
             }
         } else {
-            if (coords.getEmpty(team, coords.posX + 1, coords.posY)) {
+            if (coords.getEmpty(team, barriers,coords.posX + 1, coords.posY)) {
                 coords.posX += 1;
             }
         }
@@ -59,8 +58,6 @@ public abstract class Warrior extends Human {
                 .append("\t| ATK:\t").append(attack)
                 .append("\t| HP:\t").append(hp)
                 .append(" \t|\t\t\t|")
-//                .append("  (X:Y): ")
-//                .append(coords.posX).append(":").append(coords.posY)
                 .append("\t|");
     }
 }

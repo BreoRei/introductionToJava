@@ -1,5 +1,7 @@
 package OOP.Unit;
 
+import java.util.ArrayList;
+
 public class Bandit extends Warrior {
 
     public Bandit(String name, Vector2D coords) {
@@ -10,5 +12,11 @@ public class Bandit extends Warrior {
     @Override
     public String getProfession() {
         return "Бандит";
+    }
+
+    @Override
+    public String getEmoji() {
+        if(hp == 0) return "\uD83D\uDC80";
+        return "\uD83E\uDD77";
     }
 }
